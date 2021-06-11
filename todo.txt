@@ -1,0 +1,4 @@
+0. send state for new joinee
+2. test yt - fail - needs api integration bullshit
+3. script for production
+4. test deployment
