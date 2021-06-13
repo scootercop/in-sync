@@ -3,6 +3,7 @@ const settings = require("./config/appSettings");
 const webpack = require("webpack");
 const processEnv = settings[process.env.AppSettings];
 const CopyPlugin = require("copy-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -11,22 +12,8 @@ module.exports = {
     rules: [
       {
         test: /\.ts(x?)$/,
+        use: ["babel-loader", "ts-loader"],
         exclude: /node_modules/,
-        use: [
-          {
-            loader: "babel-loader",
-            options: {
-              cacheDirectory: true,
-            },
-          },
-          {
-            loader: "ts-loader",
-            options: {
-              transpileOnly: true,
-              experimentalWatchApi: true,
-            },
-          },
-        ],
       },
       {
         test: /\.js$/,
@@ -36,6 +23,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new CompressionPlugin({
+      test: /\.js(\?.*)?$/i,
+    }),
     new webpack.DefinePlugin({
       "process.env.apiURI": JSON.stringify(processEnv.apiURI),
       "process.env.appURI": JSON.stringify(processEnv.appURI),
