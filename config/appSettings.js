@@ -6,7 +6,7 @@ module.exports = {
   },
   production: {
     environment: "production",
-    apiURI: `http://insync.navalrishi.com`,
-    appURI: `http://insync.navalrishi.com`,
+    apiURI: `https://insync.navalrishi.com`,
+    appURI: `https://insync.navalrishi.com`,
   },
 };
